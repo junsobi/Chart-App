@@ -1,29 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { LineChart, Line, XAxis, YAxis } from "recharts";
-import { MockData, ResponseData } from "../types/api.types";
-import { convertResponseData } from "../api/convertResponseData";
+import React, { useEffect, useRef } from "react";
+import { createChart, updateChart } from "./chartFunctions";
+import { Chart, registerables } from "chart.js";
+import { ChartDataType } from "../types/api.types";
+import "chartjs-adapter-date-fns";
 
-interface ChartProps {
-  data: MockData;
+interface ChartComponentProps {
+  data: ChartDataType;
 }
 
-const ChartComponents: React.FC<ChartProps> = ({ data }) => {
-  const [convertedData, setConvertedData] = useState<
-    (ResponseData & { time: string })[]
-  >([]);
+Chart.register(...registerables);
+
+const ChartComponent: React.FC<ChartComponentProps> = ({ data }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const chartRef = useRef<null | ReturnType<typeof createChart>>(null);
 
   useEffect(() => {
-    setConvertedData(convertResponseData(data));
+    if (canvasRef.current && data) {
+      const ctx = canvasRef.current.getContext("2d");
+
+      if (ctx) {
+        if (chartRef.current) {
+          updateChart(chartRef.current, data);
+        } else {
+          chartRef.current = createChart(ctx, data);
+        }
+      }
+    }
   }, [data]);
 
-  return (
-    <LineChart width={500} height={300} data={convertedData}>
-      <XAxis dataKey="time" />
-      <YAxis />
-      <Line type="monotone" dataKey="value_area" stroke="#8884d8" />
-      <Line type="monotone" dataKey="value_bar" stroke="#82ca9d" />
-    </LineChart>
-  );
+  return <canvas ref={canvasRef}></canvas>;
 };
 
-export default ChartComponents;
+export default ChartComponent;

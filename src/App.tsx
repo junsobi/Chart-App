@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { fetchMockData } from "./api/api";
 import ChartComponents from "./components/ChartComponent";
-import { MockData } from "./types/api.types";
+import { useConvertedData } from "./hooks/useConvertedData";
 
 function App() {
-  const [data, setData] = useState<MockData | null>(null);
+  const chartData = useConvertedData();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetchMockData();
-      setData(result);
-    };
-
-    fetchData();
-  }, []);
-
-  if (!data) return <div>Loading...</div>;
-
-  return <ChartComponents data={data} />;
+  return (
+    <div className="flex items-center justify-center">
+      <div className="w-5/6">
+        {chartData ? <ChartComponents data={chartData} /> : <p>Loading...</p>}
+      </div>
+    </div>
+  );
 }
 
 export default App;

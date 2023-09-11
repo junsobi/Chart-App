@@ -9,3 +9,9 @@ export interface MockData {
   version: number;
   response: Record<string, ResponseData>;
 }
+
+export type ChartDataType = {
+  timeArray: string[];
+  areaArray: any[];
+  barArray: any[];
+};

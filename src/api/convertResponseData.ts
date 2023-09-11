@@ -1,10 +1,13 @@
-import { MockData, ResponseData } from "../types/api.types";
+import { MockData } from "../types/api.types";
 
-export function convertResponseData(
-  data: MockData
-): Array<ResponseData & { time: string }> {
-  return Object.entries(data.response).map(([time, value]) => ({
-    ...value,
-    time,
-  }));
+export function convertResponseData(data: MockData) {
+  const timeArray = Object.keys(data.response);
+  const areaArray = Object.values(data.response).map(
+    (item: any) => item.value_area
+  );
+  const barArray = Object.values(data.response).map(
+    (item: any) => item.value_bar
+  );
+
+  return { timeArray, areaArray, barArray };
 }
