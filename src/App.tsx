@@ -3,6 +3,7 @@ import { useConvertedData } from "./hooks/useConvertedData";
 import UniqueItemsButtons from "./components/UniqueItemsButtons";
 import LoadingComponent from "./components/LoadingComponent";
 import { SelectedIdProvider } from "./contexts/selectedIdContext";
+import ChartLayout from "./layouts/ChartLayout";
 
 function App() {
   const chartData = useConvertedData();
@@ -10,18 +11,16 @@ function App() {
 
   return (
     <SelectedIdProvider>
-      <div className="w-screen h-screen flex items-center justify-center bg-gray-100">
-        <div className="w-5/6">
-          {chartData ? (
-            <>
-              <UniqueItemsButtons ids={uniqueIds} />
-              <ChartComponents data={chartData} />
-            </>
-          ) : (
-            <LoadingComponent />
-          )}
-        </div>
-      </div>
+      <ChartLayout>
+        {chartData ? (
+          <>
+            <UniqueItemsButtons ids={uniqueIds} />
+            <ChartComponents data={chartData} />
+          </>
+        ) : (
+          <LoadingComponent />
+        )}
+      </ChartLayout>
     </SelectedIdProvider>
   );
 }

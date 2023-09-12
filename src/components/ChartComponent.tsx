@@ -4,6 +4,7 @@ import { updateChart } from "./updateChart";
 import { Chart, registerables } from "chart.js";
 import { SelectedIdContext } from "../contexts/selectedIdContext";
 import { useHighlight } from "../hooks/useHighlight";
+import useOnClick from "../hooks/useOnClick";
 import { ChartDataType } from "../types/api.types";
 import "chartjs-adapter-date-fns";
 import annotationPlugin from "chartjs-plugin-annotation";
@@ -18,7 +19,8 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ data }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<null | ReturnType<typeof createChart>>(null);
 
-  const { selectedButton } = useContext(SelectedIdContext);
+  const { selectedButton, setSelectedButton } = useContext(SelectedIdContext);
+  const onClickHandler = useOnClick(chartRef, setSelectedButton, data);
 
   useEffect(() => {
     if (canvasRef.current && data) {
@@ -29,10 +31,14 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ data }) => {
           updateChart(chartRef.current, data);
         } else {
           chartRef.current = createChart(ctx, data);
+
+          if (chartRef.current) {
+            chartRef.current.options.onClick = onClickHandler;
+          }
         }
       }
     }
-  }, [data]);
+  }, [data, onClickHandler]);
 
   useHighlight(chartRef, data, selectedButton);
 

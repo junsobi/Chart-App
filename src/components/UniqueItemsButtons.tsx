@@ -10,7 +10,7 @@ const UniqueItemsButtons: React.FC<UniqueItemsButtonsProps> = ({ ids }) => {
   const { selectedButton, setSelectedButton } = useContext(SelectedIdContext);
 
   return (
-    <div>
+    <div className="flex gap-4 pl-16">
       <Button
         label="해제"
         isActive={selectedButton === null}
