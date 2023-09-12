@@ -1,4 +1,9 @@
 import { ChartDataset } from "chart.js";
+import {
+  LINE_COLOR,
+  BAR_COLOR,
+  LINE_BACKGROUND,
+} from "../constants/colorConstants";
 
 export function createDatasets(
   areaData: number[],
@@ -11,9 +16,10 @@ export function createDatasets(
       data: areaData,
       yAxisID: "y-axis-area",
       fill: true,
-      borderColor: "#014e60",
-      backgroundColor: "rgba(1,78,96,0.5)",
+      borderColor: LINE_COLOR,
+      backgroundColor: LINE_BACKGROUND,
       tension: 0.4,
+      pointBackgroundColor: areaData.map(() => LINE_COLOR),
     },
     {
       type: "bar",
@@ -22,7 +28,7 @@ export function createDatasets(
       yAxisID: "y-axis-bar",
       barPercentage: 1.0,
       categoryPercentage: 1.0,
-      backgroundColor: "#ffbfab",
+      backgroundColor: BAR_COLOR,
     },
   ];
 }

@@ -1,3 +1,5 @@
+import { TOP_BOX, BOTTOM_BOX } from "../constants/colorConstants";
+
 export function createAnnotations() {
   return {
     annotations: [
@@ -6,14 +8,14 @@ export function createAnnotations() {
         yScaleID: "y-axis-bar",
         yMin: 10000,
         yMax: 20000,
-        backgroundColor: "rgba(255,204,204,0.2)",
+        backgroundColor: TOP_BOX,
       },
       {
         type: "box" as const,
         yScaleID: "y-axis-area",
         yMin: 0,
         yMax: 100,
-        backgroundColor: "rgba(173,216,230,0.2)",
+        backgroundColor: BOTTOM_BOX,
       },
     ],
   };
