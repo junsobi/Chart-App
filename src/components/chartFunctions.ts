@@ -1,65 +1,37 @@
-import { Chart, ChartConfiguration } from "chart.js";
-
-interface ChartDataType {
-  timeArray: Array<string>;
-  areaArray: Array<number>;
-  barArray: Array<number>;
-}
+import { Chart } from "chart.js";
+import "chartjs-plugin-annotation";
+import { createDatasets } from "../utils/createDatasets";
+import { scales } from "../utils/scales";
+import { title, beforeBody, label } from "../utils/tooltipCallbacks";
+import { createAnnotations } from "../utils/createAnnotation";
+import { ChartDataType, CustomChartConfiguration } from "../types/api.types";
+import "moment-timezone";
 
 export function createChart(
   ctx: CanvasRenderingContext2D,
   data: ChartDataType
 ): Chart {
-  const config: ChartConfiguration = {
+  const config: CustomChartConfiguration = {
     type: "line",
     data: {
       labels: data.timeArray,
-      datasets: [
-        {
-          label: "value_area",
-          data: data.areaArray,
-          yAxisID: "y-axis-area",
-          fill: false,
-          borderColor: "blue",
-        },
-        {
-          label: "value_bar",
-          data: data.barArray,
-          yAxisID: "y-axis-bar",
-          fill: false,
-          borderColor: "red",
-        },
-      ],
+      datasets: createDatasets(data.areaArray, data.barArray),
     },
     options: {
-      scales: {
-        x: {
-          type: "time",
-          time: {
-            unit: "second",
+      scales,
+      plugins: {
+        tooltip: {
+          mode: "index",
+          intersect: false,
+          callbacks: {
+            title,
+            beforeBody: (contexts) => beforeBody(contexts, data),
+            label,
           },
         },
-        "y-axis-area": {
-          type: "linear",
-          position: "left",
-        },
-        "y-axis-bar": {
-          type: "linear",
-          position: "right",
-        },
+        annotation: createAnnotations(),
       },
     },
   };
-
   return new Chart(ctx, config);
-}
-
-export function updateChart(
-  chartInstance: Chart,
-  newData: ChartDataType
-): void {
-  chartInstance.data.labels = newData.timeArray as unknown as string[];
-  chartInstance.data.datasets[0].data = newData.areaArray;
-  chartInstance.data.datasets[1].data = newData.barArray;
-  chartInstance.update();
 }
