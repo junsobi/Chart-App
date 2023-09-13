@@ -1,6 +1,8 @@
 ### 프리온보딩 프론트엔드 인턴십 4주차 과제
 
 ### 화면 디자인
+<img width="888" alt="스크린샷 2023-09-13 오전 11 39 13" src="https://github.com/junsobi/Chart-App/assets/127650045/46c6c47a-027a-48c7-a5a2-ca6eed38a3cf">
+
 
 ### 이름
 
