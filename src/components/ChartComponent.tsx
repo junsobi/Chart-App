@@ -19,8 +19,8 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ data }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<null | ReturnType<typeof createChart>>(null);
 
-  const { selectedButton, setSelectedButton } = useContext(SelectedIdContext);
-  const onClickHandler = useOnClick(chartRef, setSelectedButton, data);
+  const { selectedButton } = useContext(SelectedIdContext);
+  const onClickHandler = useOnClick(chartRef, data);
 
   useEffect(() => {
     if (canvasRef.current && data) {
