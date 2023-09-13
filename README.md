@@ -1,4 +1,4 @@
-### 프리온보딩 프론트엔드 인턴십
+### 프리온보딩 프론트엔드 인턴십 4주차 과제
 
 ### 이름
 
@@ -115,10 +115,10 @@ Vercel을 통해 배포.
 
 ### 🌟 주요 특징:
 
-1. 효과적인 갱신: React의 useEffect를 사용하여 chartRef, data, 그리고 selectedButton의 변화에 따라 차트를 업데이트합니다.
+1. 효과적인 갱신: React의 **useEffect를** 사용하여 **chartRef**, **data**, 그리고 **selectedButton의** 변화에 따라 차트를 업데이트합니다.
 2. 선형 차트 강조: 선형 차트 데이터셋에서 선택된 버튼에 해당하는 데이터 포인트를 강조합니다.
 3. 막대 차트 강조: 막대 차트 데이터셋에서 선택된 버튼에 해당하는 데이터 포인트를 강조합니다.
-4. 차트 업데이트: 변경사항을 반영하기 위해 chartRef.current.update() 메소드를 호출하여 차트를 업데이트 합니다.
+4. 차트 업데이트: 변경사항을 반영하기 위해 **chartRef.current.update()** 메소드를 호출하여 차트를 업데이트 합니다.
 
 ---
 
@@ -128,19 +128,21 @@ useOnClick 훅은 차트의 클릭 이벤트를 처리하는 기능을 수행합
 
 ### 🌟 주요 특징:
 
-1. 컨텍스트 사용: SelectedIdContext 컨텍스트에서 setSelectedButton 함수를 가져옵니다.
+1. 컨텍스트 사용: **SelectedIdContext** 컨텍스트에서 **setSelectedButton** 함수를 가져옵니다.
 2. 클릭 이벤트 처리: 클릭된 차트 요소에 따라 선택된 버튼의 상태를 업데이트합니다.
-3. 차트 요소 탐색: getElementsAtEventForMode 메소드를 사용하여 클릭된 차트 요소를 가져옵니다.
+3. 차트 요소 탐색: **getElementsAtEventForMode** 메소드를 사용하여 클릭된 차트 요소를 가져옵니다.
 4. 선택된 버튼 상태 업데이트: 클릭한 차트 요소에 해당하는 ID가 이미 선택되어 있으면 선택을 취소하고, 그렇지 않으면 해당 ID로 상태를 업데이트합니다.
 
 ---
 
-📂 contexts/selectedIdContext.tsx
-SelectedIdContext 컨텍스트와 SelectedIdProvider 프로바이더는 선택된 버튼의 상태를 관리하는 데 사용됩니다.
+### 📂 contexts/selectedIdContext.tsx
 
-🌟 주요 특징:
-컨텍스트 생성: selectedButton 상태와 이를 설정하는 함수 setSelectedButton을 포함한 컨텍스트를 생성합니다.
-기본 상태 설정: 기본적으로 selectedButton은 null이며, setSelectedButton은 빈 함수입니다.
-프로바이더 구성: useState 훅을 사용하여 선택된 버튼의 상태를 관리하고, 이 상태와 업데이트 함수를 프로바이더의 value로 제공합니다.
+**SelectedIdContext** 컨텍스트와 **SelectedIdProvider** 프로바이더는 선택된 버튼의 상태를 관리하는 데 사용됩니다.
+
+## 🌟 주요 특징:
+
+1. 컨텍스트 생성: **selectedButton** 상태와 이를 설정하는 함수 **setSelectedButton을** 포함한 컨텍스트를 생성합니다.
+2. 기본 상태 설정: 기본적으로 selectedButton은 null이며, setSelectedButton은 빈 함수입니다.
+3. 프로바이더 구성: useState 훅을 사용하여 선택된 버튼의 상태를 관리하고, 이 상태와 업데이트 함수를 프로바이더의 value로 제공합니다.
 
 ---
