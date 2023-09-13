@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useContext } from "react";
-import { createChart } from "./chartFunctions";
+import { createChart } from "./createChart";
 import { updateChart } from "./updateChart";
 import { Chart, registerables } from "chart.js";
 import { SelectedIdContext } from "../contexts/selectedIdContext";

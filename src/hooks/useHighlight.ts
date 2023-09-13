@@ -1,4 +1,4 @@
-import { createChart } from "../components/chartFunctions";
+import { createChart } from "../components/createChart";
 import { useEffect } from "react";
 import { ChartDataType } from "../types/api.types";
 import {
@@ -25,9 +25,8 @@ export const useHighlight = (
             }, [])
           : [];
 
-        datasets[0].pointBackgroundColor = datasets[0].data.map(
-          (_, idx) =>
-            matchingIndices.includes(idx) ? LINE_HIGHLIGHT_COLOR : LINE_COLOR // Use the color constants here.
+        datasets[0].pointBackgroundColor = datasets[0].data.map((_, idx) =>
+          matchingIndices.includes(idx) ? LINE_HIGHLIGHT_COLOR : LINE_COLOR
         );
       }
 
@@ -39,9 +38,8 @@ export const useHighlight = (
             }, [])
           : [];
 
-        datasets[1].backgroundColor = datasets[1].data.map(
-          (_, idx) =>
-            matchingIndices.includes(idx) ? BAR_HIGHLIGHT_COLOR : BAR_COLOR // Use the color constants here.
+        datasets[1].backgroundColor = datasets[1].data.map((_, idx) =>
+          matchingIndices.includes(idx) ? BAR_HIGHLIGHT_COLOR : BAR_COLOR
         );
       }
 
